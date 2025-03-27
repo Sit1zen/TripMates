@@ -1,0 +1,31 @@
+{% extends 'tripmate/base.html' %}
+{% load static %}
+{% block content %}
+<main>
+  <h2>Edit Your Profile</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    <label for="id_email">Email:</label>
+    {{ form.email }}
+
+    <label for="id_gender">Gender:</label>
+    {{ form.gender }}
+
+    <label for="id_picture">Profile Photo:</label>
+    {{ form.picture }}
+
+    <label for="id_bio">Biography:</label>
+    {{ form.bio }}
+
+    <input type="submit" value="Save Changes" />
+    <a href="{% url 'profile' %}">Back to Profile</a>
+  </form>
+
+  
+</main>
+{% endblock %}

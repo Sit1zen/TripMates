@@ -1,0 +1,39 @@
+{% extends 'tripmate/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
+
+        <h2 style="font-family: 'Alfa Slab One', serif; color: #333;">Register an Account</h2>
+
+        {{ form.non_field_errors }}
+
+        <label for="id_username">Username:</label>
+        {{ form.username }}
+
+        <label for="id_gender">Gender:</label>
+        {{ form.gender }}
+
+        <label for="id_email">Email Address:</label>
+        {{ form.email }}
+
+        <label for="id_password1">Password:</label>
+        {{ form.password1 }}
+
+        <label for="id_password2">Confirm Password:</label>
+        {{ form.password2 }}
+
+        <label for="id_picture">Profile Photo:</label>
+        {{ form.picture }}
+
+
+        <input type="submit" value="Register">
+
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </form>
+</main>
+{% endblock %}

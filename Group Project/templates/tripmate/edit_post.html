@@ -1,0 +1,13 @@
+{% extends 'tripmate/base.html' %}
+{% load static %}
+{% block content %}
+<main>
+  <form method="post" enctype="multipart/form-data">
+    <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
+    <h2>Edit Your Post</h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+</main>
+{% endblock %}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripMate</title>
+    <!-- Link to normalize.css for cross-browser consistency -->
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <!-- Link to CSS file for styling -->
+    <link rel="stylesheet" href="/static/css/my_css.css">
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Importing the Alfa Slab One font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Main container for the page content -->
+    <div class="container">
+        <!-- Box for the logo -->
+        <div class="box box-one">
+            <!-- Logo image -->
+            <img  class="logo" src="/static/images/logo.jpg" alt="">
+        </div> 
+        <!-- Box for navigation links -->
+        <div class="box box-two">
+            <!-- Navigation menu -->
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{% url 'index' %}">Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'post_feed' %}">Posts</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'search' %}">Search</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'create_post' %}">New Post</a>
+                    </li>
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+
+                    {% else %}
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- Main content section -->
+    {% block content %}{% endblock %}
+</body>
+<!-- Footer section containing copyright information -->
+<footer>&copy; TripMate </footer>
+</html>

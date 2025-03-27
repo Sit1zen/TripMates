@@ -1,0 +1,36 @@
+{% extends 'tripmate/base.html' %}
+{% load static %}
+{% block content %}
+
+<main class="search-page">
+
+  <form method="get" action="{% url 'search' %}">
+    <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
+    <h2>Search Posts</h2>
+    <input type="text" name="q" placeholder="Search by caption..." value="{{ query }}">
+    <button type="submit">Search</button>
+      <form>
+  {% if query %}
+    <h3>Results for "{{ query }}"</h3>
+    {% if results %}
+      <ul>
+        {% for post in results %}
+          <li>
+            <strong>{{ post.user.username }}</strong>: {{ post.caption }}
+            {% if post.image %}
+              <br><img src="{{ post.image.url }}" alt="Post Image" style="width: 150px; margin-top: 10px;">
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No results found.</p>
+    {% endif %}
+  {% endif %}
+</form>
+  </form>
+
+
+</main>
+
+{% endblock %}

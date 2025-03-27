@@ -1,0 +1,278 @@
+/* Setting base font size for the document */
+html {
+  font-size: 62.5%;
+}
+
+/* Styling for the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.6rem;
+}
+
+/* Styling for the main container */
+.container {
+  display: grid;
+  grid-template: 50px/ 10% 90%;
+  height: 64px;
+  margin: 0%;
+}
+
+/* Styling for the logo image */
+.logo {
+  height: 64px;
+  width: 150px;
+  object-fit: cover;
+}
+
+/* Styling for the navigation menu */
+nav {
+  background: rgb(3, 252, 186);
+  background: linear-gradient(311deg, rgba(3, 252, 186,1) 50%, rgba(255,255,255,1) 92%);
+  padding: .7rem;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding-left: 0;
+  text-align: center;
+  justify-content: flex-end;
+}
+
+nav li {
+  margin: 0 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-family: "Alfa Slab One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+nav a:hover {
+  color: #0b754e;
+  font-size: larger;
+  font-style: italic;
+}
+
+/* Styling for the background image */
+.background {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+
+}
+
+/* Styling for the HomePage heading */
+.Welcome {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #03fcba;
+  font-size: 50px;
+  text-align: center;
+  font-family: "Alfa Slab One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.Welcome:hover {
+  font-size: 60px;
+  font-style: italic;
+}
+
+/* Styling for the first paragraph text */
+.text1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #03fcba;
+  font-size: 30px;
+  text-align: center;
+  font-family: "Crete Round", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.text1:hover {
+  font-size: 40px;
+}
+
+/* Styling for the second paragraph text */
+.text2 {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333;
+  font-size: 30px;
+  text-align: center;
+  font-family: "Crete Round", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.text2:hover {
+  font-size: 40px;
+}
+
+
+/* Styling for the main content section */
+main {
+  background-image: url('/static/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 50px 0;
+  text-align: center;
+  opacity: 1;
+
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+main.no-bg {
+  background-image: none;
+}
+
+/* Styling for the form */
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Styling for form elements */
+form label,
+form input,
+form select,
+form textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  font-family: "Alfa Slab One", serif;
+  color: #444;
+}
+
+/* Styling for the submit button */
+form input[type="submit"] {
+  background-color: #03fcba;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: "Alfa Slab One", serif;
+}
+
+form input[type="submit"]:hover {
+  background-color: #4a70ec;
+  font-size: larger;
+}
+
+/* Styling for the footer */
+footer {
+  background-color: #03fcba;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  font-family: "Alfa Slab One", serif;
+}
+
+/* Styling for the sections */
+section {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 1.5em;
+}
+
+section h2 {
+  color: #222;
+  font-family: "Alfa Slab One", serif;
+}
+
+section ul,
+section p {
+  color: #555;
+  font-family: "Crete Round", serif;
+}
+
+section:hover {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 2em;
+}
+
+.profile-container {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('../images/beach-background.jpg'); 
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.profile-card {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.profile-card h2 {
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+}
+
+.edit-profile-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: purple;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.edit-profile-link:hover {
+  color: #5a0099;
+}
+
+.post {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}

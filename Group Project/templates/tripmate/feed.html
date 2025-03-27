@@ -1,0 +1,66 @@
+{% extends 'tripmate/base.html' %}
+{% load static %}
+{% block content %}
+
+<main class="no-bg">
+    <h2>Post</h2>
+    {% for post in posts %}
+    <div class="post">
+      <div style="display: flex; align-items: center;">
+        {% if post.user.userprofile.profile_photo %}
+          <img src="{{ post.user.userprofile.profile_photo.url }}" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+        {% endif %}
+        <p><strong>{{ post.user.username }}</strong> posted:</p>
+      </div>
+  
+      <img src="{{ post.image.url }}" style="max-width: 400px;" />
+      <p>{{ post.caption }}</p>
+      <p><small>{{ post.created_at }}</small></p>
+  
+      <form action="{% url 'like_post' post.id %}" method="post" style="margin-bottom: 10px;">
+        {% csrf_token %}
+        {% if user in post.likes.all %}
+          <button type="submit">❤️ Unlike</button>
+        {% else %}
+          <button type="submit">🤍 Like</button>
+        {% endif %}
+        <span>{{ post.total_likes }} like{{ post.total_likes|pluralize }}</span>
+      </form>
+      
+      <!-- Who liked this -->
+      {% if post.likes.all %}
+        <p><strong>Liked by:</strong> 
+          {% for liker in post.likes.all %}
+            {{ liker.username }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
+  
+      <!-- Comments -->
+      <h4>Comments:</h4>
+      {% for comment in post.comments.all %}
+        <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+      {% empty %}
+        <p>No comments yet.</p>
+      {% endfor %}
+
+      {% if user == post.user %}
+    <p>
+    <a href="{% url 'edit_post' post.id %}">✏️ Edit</a> |
+    <a href="{% url 'delete_post' post.id %}">🗑️ Delete</a>
+    </p>
+    {% endif %}
+  
+      <!-- Comment form -->
+      <form method="post" action="{% url 'add_comment' post.id %}">
+        {% csrf_token %}
+        <label for="id_content_{{ post.id }}"><strong>Add a comment:</strong></label><br>
+        <textarea name="content" id="id_content_{{ post.id }}" rows="3" style="width: 100%; max-width: 500px;"></textarea><br>
+        <input type="submit" value="Comment">
+      </form>
+    </div>
+  {% endfor %}
+
+</main>
+
+{% endblock %} 

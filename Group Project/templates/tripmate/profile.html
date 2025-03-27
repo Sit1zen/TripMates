@@ -1,0 +1,21 @@
+{% extends 'tripmate/base.html' %}
+{% load static %}
+
+{% block content %}
+  <main>
+    <form>
+        <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
+        <h2>Your Profile</h2>
+        <div>
+          <img src="{{ user.userprofile.picture.url }}" alt="Profile Photo" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+        </div>
+    
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Gender:</strong> {{ user.userprofile.gender|title }}</p>
+        <p><strong>Bio:</strong></p>
+        <p>{{ user.userprofile.bio|linebreaks }}</p>
+        <a href="{% url 'edit_profile' %}">Edit Profile</a>
+    </form>
+  </main>
+{% endblock %}

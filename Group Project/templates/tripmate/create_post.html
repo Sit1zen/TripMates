@@ -1,0 +1,13 @@
+{% extends 'tripmate/base.html' %}
+{% load static %}
+{% block content %}
+<main>
+<h2 style="color: #03fcba;">Create New Post</h2>
+<form method="post" enctype="multipart/form-data">
+    <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Post" />
+</form>
+</main>
+{% endblock %}
