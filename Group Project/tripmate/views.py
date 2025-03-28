@@ -17,6 +17,8 @@ from django.contrib.auth import login as auth_login, authenticate
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from .forms import UserProfileForm
+from django.contrib import messages
+from django.contrib.auth.models import User
 
 
 
@@ -58,7 +60,11 @@ def register_view(request):
             picture = form.cleaned_data.get('picture') 
 
             UserProfile.objects.create(user=user, gender=gender, picture=picture)
+            messages.success(request, "Registration successful! You can now log in.")
             return redirect('login')
+        else: 
+            print(form.errors)
+            messages.error(request, "Registration failed. Please correct the errors below.")
     else:
         form = CustomUserCreationForm()
     return render(request, 'tripmate/register.html', {'form': form})
@@ -83,10 +89,12 @@ def logout_view(request):
 def profile_view(request):
     user = request.user
     profile = UserProfile.objects.get(user=user)
+    friends = profile.friends.all()
 
     context = {
         'user': user,
         'profile': profile,
+        'friends': friends,
     }
     return render(request, 'tripmate/profile.html', context)
 
@@ -108,7 +116,17 @@ def create_post(request):
 def post_feed(request):
     posts = Post.objects.all().order_by('-created_at')
     comment_form = CommentForm()
-    return render(request, 'tripmate/feed.html', {'posts': posts, 'comment_form': comment_form})
+    show_only_user = request.GET.get('mine') == '1'
+    if show_only_user:
+        posts = Post.objects.filter(user=request.user).order_by('-created_at')
+    else:
+        posts = Post.objects.all().order_by('-created_at')
+
+    return render(request, 'tripmate/feed.html', {
+        'posts': posts, 
+        'comment_form': comment_form,
+        'show_only_user': show_only_user,
+        })
 
 @login_required
 def add_comment(request, post_id):
@@ -196,4 +214,49 @@ def ajax_like_post(request):
     return JsonResponse({
         'liked': liked,
         'like_count': post.total_likes(),
+    })
+
+@login_required
+def view_user_profile(request, username):
+    profile_user = get_object_or_404(User, username=username)
+    profile = get_object_or_404(UserProfile, user=profile_user)
+    current_user_profile = request.user.userprofile
+    is_friend = profile in current_user_profile.friends.all()
+
+    user_posts = Post.objects.filter(user=profile_user).order_by('-created_at')
+    friends = profile.friends.all()
+
+    return render(request, 'tripmate/view_profile.html', {
+        'profile_user': profile_user,
+        'profile': profile,
+        'is_friend': is_friend,
+        'user_posts': user_posts,
+        'friends': friends,
+    })
+
+@require_POST
+@login_required
+def add_friend(request, username):
+    target_user = get_object_or_404(User, username=username)
+    request.user.userprofile.friends.add(target_user.userprofile)
+    return redirect('view_profile', username=username)
+
+@require_POST
+@login_required
+def remove_friend(request, username):
+    target_user = get_object_or_404(User, username=username)
+    request.user.userprofile.friends.remove(target_user.userprofile)
+    return redirect('view_profile', username=username)
+
+@login_required
+def user_search_view(request):
+    query = request.GET.get('q')
+    users = []
+
+    if query:
+        users = User.objects.filter(username__icontains=query).exclude(id=request.user.id)
+
+    return render(request, 'tripmate/user_search.html', {
+        'query': query,
+        'users': users,
     })

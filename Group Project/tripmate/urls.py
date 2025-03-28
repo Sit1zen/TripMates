@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('register/', views.register_view, name='register'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.profile_view, name='profile'),
     path('profile/edit/', views.edit_profile_view, name='edit_profile'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'), 
@@ -17,4 +17,8 @@ urlpatterns = [
     path('post/<int:post_id>/edit/', views.edit_post, name='edit_post'),
     path('post/<int:post_id>/delete/', views.delete_post, name='delete_post'),
     path('ajax/like/', views.ajax_like_post, name='ajax_like_post'),
+    path('users/<str:username>/add/', views.add_friend, name='add_friend'),
+    path('users/<str:username>/remove/', views.remove_friend, name='remove_friend'),
+    path('users/search/', views.user_search_view, name='user_search'),
+    path('users/<str:username>/', views.view_user_profile, name='view_profile'),
 ]

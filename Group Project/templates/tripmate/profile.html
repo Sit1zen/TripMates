@@ -7,7 +7,11 @@
         <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
         <h2>Your Profile</h2>
         <div>
-          <img src="{{ user.userprofile.picture.url }}" alt="Profile Photo" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+          {% if user.userprofile.picture %}
+            <img src="{{ user.userprofile.picture.url }}" alt="Profile Photo" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+          {% else %}
+            <img src="{% static 'images/default-profile.jpg' %}" alt="Default Photo" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+          {% endif %}
         </div>
     
         <p><strong>Username:</strong> {{ user.username }}</p>
@@ -16,6 +20,26 @@
         <p><strong>Bio:</strong></p>
         <p>{{ user.userprofile.bio|linebreaks }}</p>
         <a href="{% url 'edit_profile' %}">Edit Profile</a>
+        <hr>
+<h3>Your Friends</h3>
+{% if friends %}
+  <ul style="padding-left: 20px;">
+    {% for friend in friends %}
+    <li style="margin-bottom: 10px;">
+      <a href="{% url 'view_profile' friend.user.username %}" style="display: flex; align-items: center; text-decoration: none;">
+        {% if friend.picture %}
+          <img src="{{ friend.picture.url }}" alt="{{ friend.user.username }}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+        {% else %}
+          <img src="{% static 'images/default-profile.jpg' %}" alt="Default" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+        {% endif %}
+        <span style="font-weight: bold; color: #333;">{{ friend.user.username }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>You don't have any friends yet.</p>
+{% endif %}
     </form>
   </main>
 {% endblock %}

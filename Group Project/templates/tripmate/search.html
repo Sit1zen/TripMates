@@ -16,7 +16,9 @@
       <ul>
         {% for post in results %}
           <li>
-            <strong>{{ post.user.username }}</strong>: {{ post.caption }}
+            <strong><a href="{% url 'view_profile' post.user.username %}">
+              {{ post.user.username }}
+            </a></strong>: {{ post.caption }}
             {% if post.image %}
               <br><img src="{{ post.image.url }}" alt="Post Image" style="width: 150px; margin-top: 10px;">
             {% endif %}

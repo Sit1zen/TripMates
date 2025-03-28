@@ -3,13 +3,20 @@
 
 {% block content %}
 <main>
+    
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
 
         <h2 style="font-family: 'Alfa Slab One', serif; color: #333;">Register an Account</h2>
-
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %}">
+                    {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
         {{ form.non_field_errors }}
 
         <label for="id_username">Username:</label>
