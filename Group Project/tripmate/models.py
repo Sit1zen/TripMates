@@ -13,6 +13,7 @@ class UserProfile(models.Model):
     picture = models.ImageField(upload_to='profile_images', default='profile_images/logo.jpg')
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
     bio = models.TextField(blank=True)
+    friends = models.ManyToManyField("self", symmetrical=True, blank=True)
 
     def __str__(self):
         return self.user.username

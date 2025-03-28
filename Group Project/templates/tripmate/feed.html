@@ -4,16 +4,39 @@
 
 <main class="no-bg">
     <h2>Post</h2>
+    <style>
+      .button {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #00ff88;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+      }
+    
+      .button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+    <div style="margin-bottom: 20px;">
+      {% if show_only_user %}
+        <a href="{% url 'post_feed' %}" class="button">Show All Posts</a>
+      {% else %}
+        <a href="{% url 'post_feed' %}?mine=1" class="button">Show My Posts</a>
+      {% endif %}
+    </div>
     {% for post in posts %}
     <div class="post">
       <div style="display: flex; align-items: center;">
         {% if post.user.userprofile.profile_photo %}
           <img src="{{ post.user.userprofile.profile_photo.url }}" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
         {% endif %}
-        <p><strong>{{ post.user.username }}</strong> posted:</p>
+        <p><strong><a href="{% url 'view_profile' post.user.username %}">{{ post.user.username }}</a></strong> posted:</p>
       </div>
   
-      <img src="{{ post.image.url }}" style="max-width: 400px;" />
+      <img src="{{ post.image.url }}" style="max-width: 600px;" />
       <p>{{ post.caption }}</p>
       <p><small>{{ post.created_at }}</small></p>
   
@@ -31,7 +54,7 @@
       {% if post.likes.all %}
         <p><strong>Liked by:</strong> 
           {% for liker in post.likes.all %}
-            {{ liker.username }}{% if not forloop.last %}, {% endif %}
+          <a href="{% url 'view_profile' post.user.username %}">{{ liker.username }}</a>{% if not forloop.last %}, {% endif %}
           {% endfor %}
         </p>
       {% endif %}
@@ -39,7 +62,7 @@
       <!-- Comments -->
       <h4>Comments:</h4>
       {% for comment in post.comments.all %}
-        <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+        <p><strong><a href="{% url 'view_profile' post.user.username %}"></a>{{ comment.user.username }}</a>:</strong> {{ comment.content }}</p>
       {% empty %}
         <p>No comments yet.</p>
       {% endfor %}

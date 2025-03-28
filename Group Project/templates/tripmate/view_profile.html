@@ -1,0 +1,91 @@
+{% extends 'tripmate/base.html' %}
+{% load static %}
+{% csrf_token %}
+
+{% block content %}
+  <main>
+    <form>
+      <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
+      <h2>{{ profile_user.username }}'s Profile</h2>
+      <div>
+        
+        {% if profile.picture %}
+            <img src="{{ profile.picture.url }}" alt="Profile Photo" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+        {% else %}
+            <img src="{% static 'images/default-profile.jpg' %}" alt="Default Photo" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+        {% endif %}
+      </div>
+
+      <p><strong>Username:</strong> {{ profile_user.username }}</p>
+      <p><strong>Email:</strong> {{ profile_user.email }}</p>
+      <p><strong>Gender:</strong> {{ profile.gender|title }}</p>
+      <p><strong>Bio:</strong></p>
+      <p>{{ profile.bio|linebreaks }}</p>
+
+      {% if profile_user != request.user %}
+  {% if is_friend %}
+    <button onclick="submitFriendAction(`{% url 'remove_friend' profile_user.username %}`)" type="button">
+      Remove Friend
+    </button>
+  {% else %}
+    <button onclick="submitFriendAction(`{% url 'add_friend' profile_user.username %}`)" type="button">
+      Add Friend
+    </button>
+  {% endif %}
+{% endif %}
+      <hr>
+      <h3>{{ profile_user.username }}'s Friends</h3>
+{% if friends %}
+  <ul style="padding-left: 20px;">
+    {% for friend in friends %}
+    <li style="margin-bottom: 10px;">
+      <a href="{% url 'view_profile' friend.user.username %}" style="display: flex; align-items: center; text-decoration: none;">
+        {% if friend.picture %}
+          <img src="{{ friend.picture.url }}" alt="{{ friend.user.username }}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+        {% else %}
+          <img src="{% static 'images/default-profile.jpg' %}" alt="Default" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+        {% endif %}
+        <span style="font-weight: bold; color: #333;">{{ friend.user.username }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>{{ profile_user.username }}'s don't have any friends yet.</p>
+{% endif %}
+      <hr>
+<h3>Posts by {{ profile_user.username }}</h3>
+
+{% if user_posts %}
+  {% for post in user_posts %}
+    <div class="post" style="margin-bottom: 20px;">
+      <img src="{{ post.image.url }}" alt="Post Image" style="max-width: 400px; display: block;">
+      <p>{{ post.caption }}</p>
+      <p><small>{{ post.created_at }}</small></p>
+      <p><strong>{{ post.total_likes }} like{{ post.total_likes|pluralize }}</strong></p>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>This user hasn’t posted anything yet.</p>
+{% endif %}
+<script>
+    function submitFriendAction(url) {
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = url;
+  
+      const csrfToken = "{{ csrf_token }}";
+  
+      const csrfInput = document.createElement("input");
+      csrfInput.type = "hidden";
+      csrfInput.name = "csrfmiddlewaretoken";
+      csrfInput.value = csrfToken;
+  
+      form.appendChild(csrfInput);
+      document.body.appendChild(form);
+      form.submit();
+    }
+  </script>
+</form>
+  </main>
+{% endblock %}
