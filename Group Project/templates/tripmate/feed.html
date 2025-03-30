@@ -2,88 +2,87 @@
 {% load static %}
 {% block content %}
 
-<main class="no-bg">
-    <h2>Post</h2>
-    <style>
-      .button {
-        display: inline-block;
-        padding: 8px 16px;
-        background-color: #00ff88;
-        color: white;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: background-color 0.2s ease;
-      }
-    
-      .button:hover {
-        background-color: #0056b3;
-      }
-    </style>
-    <div style="margin-bottom: 20px;">
-      {% if show_only_user %}
-        <a href="{% url 'post_feed' %}" class="button">Show All Posts</a>
-      {% else %}
-        <a href="{% url 'post_feed' %}?mine=1" class="button">Show My Posts</a>
-      {% endif %}
-    </div>
-    {% for post in posts %}
-    <div class="post">
-      <div style="display: flex; align-items: center;">
+<main class="feed-container">
+  <h2>Post Feed</h2>
+  <img class="background" src="{% static 'images/background6.jpg' %}" alt="">
+  <!-- Filter buttons -->
+  <div class="button-container">
+    {% if show_only_user %}
+      <a href="{% url 'post_feed' %}" class="button">Show All Posts</a>
+    {% else %}
+      <a href="{% url 'post_feed' %}?mine=1" class="button">Show My Posts</a>
+    {% endif %}
+  </div>
+
+  <!-- Loop through the posts -->
+  {% for post in posts %}
+    <div class="post-card">
+      <!-- Post Header (User Info) -->
+      <div class="post-header">
         {% if post.user.userprofile.profile_photo %}
-          <img src="{{ post.user.userprofile.profile_photo.url }}" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+          <img src="{{ post.user.userprofile.profile_photo.url }}" alt="Profile" class="profile-photo">
         {% endif %}
-        <p><strong><a href="{% url 'view_profile' post.user.username %}">{{ post.user.username }}</a></strong> posted:</p>
+        <div class="user-info">
+          <a href="{% url 'view_profile' post.user.username %}" class="username"><strong>{{ post.user.username }}</strong></a>
+          <small>{{ post.created_at }}</small>
+        </div>
       </div>
-  
-      <img src="{{ post.image.url }}" style="max-width: 600px;" />
-      <p>{{ post.caption }}</p>
-      <p><small>{{ post.created_at }}</small></p>
-  
-      <form action="{% url 'like_post' post.id %}" method="post" style="margin-bottom: 10px;">
+
+      <!-- Post Image -->
+      <img src="{{ post.image.url }}" alt="Post Image" class="post-image" />
+
+      <!-- Post Caption -->
+      <p class="caption">{{ post.caption }}</p>
+
+      <!-- Like Button and Like Count -->
+      <form action="{% url 'like_post' post.id %}" method="post" class="like-form">
         {% csrf_token %}
         {% if user in post.likes.all %}
-          <button type="submit">❤️ Unlike</button>
+          <button type="submit" class="like-button liked">❤️ Unlike</button>
         {% else %}
-          <button type="submit">🤍 Like</button>
+          <button type="submit" class="like-button">🤍 Like</button>
         {% endif %}
-        <span>{{ post.total_likes }} like{{ post.total_likes|pluralize }}</span>
+        <span class="like-count">{{ post.total_likes }} like{{ post.total_likes|pluralize }}</span>
       </form>
-      
-      <!-- Who liked this -->
+
+      <!-- Who liked the post -->
       {% if post.likes.all %}
-        <p><strong>Liked by:</strong> 
+        <div class="liked-by">
+          <strong>Liked by:</strong> 
           {% for liker in post.likes.all %}
-          <a href="{% url 'view_profile' post.user.username %}">{{ liker.username }}</a>{% if not forloop.last %}, {% endif %}
+            <a href="{% url 'view_profile' liker.username %}">{{ liker.username }}</a>{% if not forloop.last %}, {% endif %}
           {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Comments Section -->
+      <div class="comments-section">
+        <h4>Comments:</h4>
+        {% for comment in post.comments.all %}
+          <p><strong><a href="{% url 'view_profile' comment.user.username %}">{{ comment.user.username }}</a>:</strong> {{ comment.content }}</p>
+        {% empty %}
+          <p>No comments yet.</p>
+        {% endfor %}
+      </div>
+
+      <!-- Edit and Delete Buttons (if the user is the post owner) -->
+      {% if user == post.user %}
+        <p>
+          <a href="{% url 'edit_post' post.id %}" class="edit-delete-button">✏️ Edit</a> |
+          <a href="{% url 'delete_post' post.id %}" class="edit-delete-button">🗑️ Delete</a>
         </p>
       {% endif %}
-  
-      <!-- Comments -->
-      <h4>Comments:</h4>
-      {% for comment in post.comments.all %}
-        <p><strong><a href="{% url 'view_profile' post.user.username %}"></a>{{ comment.user.username }}</a>:</strong> {{ comment.content }}</p>
-      {% empty %}
-        <p>No comments yet.</p>
-      {% endfor %}
 
-      {% if user == post.user %}
-    <p>
-    <a href="{% url 'edit_post' post.id %}">✏️ Edit</a> |
-    <a href="{% url 'delete_post' post.id %}">🗑️ Delete</a>
-    </p>
-    {% endif %}
-  
-      <!-- Comment form -->
-      <form method="post" action="{% url 'add_comment' post.id %}">
+      <!-- Comment Form -->
+      <form method="post" action="{% url 'add_comment' post.id %}" class="comment-form">
         {% csrf_token %}
         <label for="id_content_{{ post.id }}"><strong>Add a comment:</strong></label><br>
-        <textarea name="content" id="id_content_{{ post.id }}" rows="3" style="width: 100%; max-width: 500px;"></textarea><br>
-        <input type="submit" value="Comment">
+        <textarea name="content" id="id_content_{{ post.id }}" rows="3" class="comment-textarea"></textarea><br>
+        <input type="submit" value="Comment" class="comment-button">
       </form>
     </div>
   {% endfor %}
 
 </main>
 
-{% endblock %} 
+{% endblock %}
