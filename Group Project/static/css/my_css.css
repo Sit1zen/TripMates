@@ -1,202 +1,187 @@
-/* Setting base font size for the document */
-html {
-  font-size: 62.5%;
+/* Upper bar */
+.upper-bar {
+  background-color: #f9f9f9;
+  padding: 1.2rem;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Styling for the body */
-body {
-  font-family: Arial, Helvetica, sans-serif;
+.background {
+  position: fixed; /* Fix the background in place */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the screen without distortion */
+  z-index: -1; /* Ensure it stays in the background */
+}
+
+
+.upper-links {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.upper-links a {
+  margin: 0 1rem;
+  color: #333;
+  text-decoration: none;
   font-size: 1.6rem;
 }
 
-/* Styling for the main container */
+.upper-links a:hover {
+  color: #03fcba;
+  font-size: 1.6rem;
+}
+
+/* Lower bar */
+.lower-bar {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  padding: 1.1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+
+.lower-links {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.lower-links a {
+  margin: 0 1rem;
+  color: #333;
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+
+.lower-links a:hover {
+  color: #03fcba;
+  font-size: 1.6rem;
+}
+
+/* Logo style for index page*/
+.logo-text {
+  width: 320px;
+  height: auto;
+  object-fit: contain;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+/* Container for layout */
 .container {
   display: grid;
-  grid-template: 50px/ 10% 90%;
+  grid-template: 50px / 10% 90%;
   height: 64px;
-  margin: 0%;
+  margin: 0;
 }
 
-/* Styling for the logo image */
-.logo {
-  height: 64px;
-  width: 150px;
-  object-fit: cover;
-}
-
-/* Styling for the navigation menu */
-nav {
-  background: rgb(3, 252, 186);
-  background: linear-gradient(311deg, rgba(3, 252, 186,1) 50%, rgba(255,255,255,1) 92%);
-  padding: .7rem;
-}
-
-nav ul {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  padding-left: 0;
-  text-align: center;
-  justify-content: flex-end;
-}
-
-nav li {
-  margin: 0 1rem;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-family: "Alfa Slab One", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-nav a:hover {
-  color: #0b754e;
-  font-size: larger;
-  font-style: italic;
-}
-
-/* Styling for the background image */
-.background {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  display: block;
-
-}
-
-/* Styling for the HomePage heading */
-.Welcome {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #03fcba;
-  font-size: 50px;
-  text-align: center;
-  font-family: "Alfa Slab One", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.Welcome:hover {
-  font-size: 60px;
-  font-style: italic;
-}
-
-/* Styling for the first paragraph text */
-.text1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #03fcba;
-  font-size: 30px;
-  text-align: center;
-  font-family: "Crete Round", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.text1:hover {
-  font-size: 40px;
-}
-
-/* Styling for the second paragraph text */
-.text2 {
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #333;
-  font-size: 30px;
-  text-align: center;
-  font-family: "Crete Round", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.text2:hover {
-  font-size: 40px;
-}
-
-
-/* Styling for the main content section */
-main {
-  background-image: url('/static/images/background.jpg');
+/* Profile container */
+.profile-container {
+  position: relative;
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
-  padding: 50px 0;
-  text-align: center;
-  opacity: 1;
-
-  min-height: 100vh; 
   display: flex;
-  flex-direction: column;
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
-main.no-bg {
-  background-image: none;
-}
-
-/* Styling for the form */
-form {
-  max-width: 500px;
-  margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 20px;
-  border-radius: 10px;
-}
-
-/* Styling for form elements */
-form label,
-form input,
-form select,
-form textarea {
-  display: block;
+.profile-card {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 450px;
   width: 100%;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-  font-family: "Alfa Slab One", serif;
-  color: #444;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Styling for the submit button */
-form input[type="submit"] {
-  background-color: #03fcba;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-family: "Alfa Slab One", serif;
+.profile-card h2 {
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
 }
 
-form input[type="submit"]:hover {
-  background-color: #4a70ec;
-  font-size: larger;
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #03fcba;
+  margin-bottom: 20px;
 }
 
-/* Styling for the footer */
+.edit-profile-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #5a0099;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.edit-profile-link:hover {
+  color: #03fcba;
+}
+
+/* Post styling for the feed */
+.post {
+  background-color: #fff;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.post img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.post-content {
+  flex-grow: 1;
+}
+
+/* Footer styling */
 footer {
   background-color: #03fcba;
   color: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   text-align: center;
-  padding: 10px 0;
-  font-family: "Alfa Slab One", serif;
+  padding: 15px 0;
+  font-size: 1.2rem;
 }
 
-/* Styling for the sections */
+/* Section styles */
 section {
   max-width: 500px;
-  margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 20px;
+  margin: 2rem auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 2rem;
   border-radius: 10px;
-  font-size: 1.5em;
+  font-size: 1.5rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 section h2 {
@@ -211,68 +196,542 @@ section p {
 }
 
 section:hover {
-  max-width: 500px;
-  margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 20px;
-  border-radius: 10px;
-  font-size: 2em;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  font-size: 2rem;
 }
 
-.profile-container {
-  position: relative;
-  min-height: 100vh;
-  background-image: url('../images/beach-background.jpg'); 
-  background-size: cover;
-  background-position: center;
+/* Form styles */
+form {
+  max-width: 500px;
+  margin: 2rem auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+form label,
+form input,
+form select,
+form textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  font-family: "Alfa Slab One", serif;
+  color: #444;
+}
+
+form input[type="submit"] {
+  background-color: #03fcba;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  background-color: #4a70ec;
+}
+
+/* Main content styling  */
+.main-content {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
   padding: 2rem;
+  min-height: calc(100vh - 100px);
 }
 
-.profile-card {
-  background-color: rgba(255, 255, 255, 0.85);
-  padding: 40px;
-  border-radius: 20px;
-  text-align: center;
-  max-width: 450px;
-  width: 100%;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+.main-content p {
+  font-size: 1.6rem;
+  color: #333;
+  line-height: 1.5;
 }
 
-.profile-card h2 {
+.main-content h1 {
+  font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  color: #222;
+  margin-bottom: 2rem;
+}
+
+/* Welcome Header styling */
+.Welcome {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #03fcba;
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Text1 styling */
+.text1 {
   font-size: 1.8rem;
+  font-weight: 400;
+  color: #03fcba;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: "Crete Round", serif;
+  line-height: 1.6;
+}
+
+/* Search bar container */
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+/* Search bar */
+.search-bar {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1.4rem;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.search-bar:focus {
+  border: 1px solid #03fcba;
+  box-shadow: none;
+}
+
+/* Search button applies for both user and post searches */
+.search-button {
+  width: auto;
+  padding: 6px 18px;
+  font-size: 1.4rem;
+  border-radius: 25px;
+  border: 1px solid #03fcba;
+  background-color: white;
+  color: #03fcba;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+}
+
+.search-button:hover {
+  background-color: #03fcba;
+  color: white;
+}
+
+.search-button:focus {
+  outline: none;
+}
+
+.results-container li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+/* Styling for the container conatining the username and caption */
+.post-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Styling for the username text */
+.username {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Image styling */
+.results-container img {
+  max-width: 300px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* General Feed Container */
+.feed-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* Button styling */
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: white;
+  color: #03fcba;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 1px solid #03fcba;
+}
+
+.button:hover {
+  background-color: #03fcba;
+  color: white;
+}
+
+/* Post Card Styling */
+.post-card {
+  background-color: #fff;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Post Header (User Info) */
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%;
+  justify-content: center;
 }
 
 .profile-photo {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  margin-bottom: 20px;
-  border: 2px solid #ccc;
+  margin-right: 10px;
 }
 
-.edit-profile-link {
-  display: inline-block;
-  margin-top: 15px;
-  color: purple;
-  font-weight: 500;
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.username {
+  font-size: 1.2rem;
+  color: #333;
   text-decoration: none;
-  transition: color 0.2s ease;
 }
 
-.edit-profile-link:hover {
-  color: #5a0099;
+.username:hover {
+  color: #03fcba;
 }
 
-.post {
-  background: white;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+.post-header small {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* Post Image */
+.post-image {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  margin-top: 15px;
+  align-self: center;
+}
+
+/* Post Caption */
+.caption {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: #333;
+  text-align: center;
+  align-self: center;
+}
+
+/* Like Button */
+.like-form {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #555;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.like-button.liked {
+  color: red;
+}
+
+.like-count {
+  margin-left: 10px;
+  font-size: 1rem;
+  color: #777;
+}
+
+/* Liked by section */
+.liked-by {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #777;
+  width: 100%;
+  text-align: center;
+}
+
+/* Comments Section */
+.comments-section {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.comments-section p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.comment-form {
+  margin-top: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.comment-textarea {
+  width: 100%;
+  max-width: 500px;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  align-self: center;
+}
+
+/* Comment Button */
+.comment-button {
+  padding: 8px 16px;
+  background-color: white;
+  color: #03fcba;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: center;
+  border: 1px solid #03fcba;
+  text-decoration: none;
+}
+
+/* Edit Delete Buttons */
+.edit-delete-button {
+  font-size: 1rem;
+  color: #555;
+  text-decoration: none;
+  align-self: center; 
+}
+
+.edit-delete-button:hover {
+  color: #03fcba;
+}
+
+/* Profile Page Layout */
+.profile-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.profile-picture-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #03fcba;
+}
+
+.profile-info {
+  flex: 2;
+  padding-left: 20px;
+}
+
+.username-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.username-container h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-right: 15px;
+}
+
+.friend-action-button {
+  padding: 8px 16px;
+  background-color: #03fcba;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.friend-action-button:hover {
+  background-color: #0056b3;
+}
+
+/* Bio Section */
+.bio-text {
+  font-size: 1rem;
+  color: #555;
+  white-space: pre-line;
+}
+
+/* Friends Section */
+.friends-section h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.friends-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 15px;
+}
+
+.friend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.friend-link {
+  text-decoration: none;
+  text-align: center;
+  color: #333;
+}
+
+.friend-picture {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  transition: transform 0.3s ease;
+}
+
+.friend-picture:hover {
+  transform: scale(1.1);
+}
+
+.friend-username {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Posts Section */
+.posts-section h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.post-card {
+  margin-bottom: 20px;
+}
+
+.post-image {
+  max-width: 400px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.caption {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-info {
+    padding-left: 0;
+  }
+
+  .friends-list {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 auto;
+  text-align: center;
+}
+
+input[type="text"], input[type="password"], input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+input[type="submit"] {
+  background-color: #03fcba;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #02e89a;
 }

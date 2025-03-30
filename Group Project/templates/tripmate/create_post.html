@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <main>
-<h2 style="color: #03fcba;">Create New Post</h2>
+    <img class="background" src="{% static 'images/background.jpg' %}" alt="">
 <form method="post" enctype="multipart/form-data">
     <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
     {% csrf_token %}

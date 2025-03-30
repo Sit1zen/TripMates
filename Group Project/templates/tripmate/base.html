@@ -17,49 +17,49 @@
 </head>
 
 <body>
+    <!-- Upper Bar - Light gray with profile, login/logout, create post -->
+    <div class="upper-bar">
+        <div class="upper-links">
+            <a href="{% url 'index' %}">Home</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'post_feed' %}">Post Feed</a>
+            <a href="{% url 'search' %}">Search Posts</a>
+            <a href="{% url 'user_search' %}">User Search</a>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Lower Bar - White background with thin border, containing index, post feed, search, user search -->
+    <div class="lower-bar">
+        <div class="lower-links">
+            {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+            <a href="{% url 'create_post' %}">Create Post</a>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+
     <!-- Main container for the page content -->
     <div class="container">
         <!-- Box for the logo -->
         <div class="box box-one">
             <!-- Logo image -->
-            <img  class="logo" src="/static/images/logo.jpg" alt="">
+    
         </div> 
         <!-- Box for navigation links -->
         <div class="box box-two">
-            <!-- Navigation menu -->
-            <nav>
-                <ul>
-                    <li>
-                        <a href="{% url 'index' %}">Home</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'post_feed' %}">Posts</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'search' %}">Search</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'create_post' %}">New Post</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'user_search' %}">Find Users</a>
-                    </li>
-                    <li><a href="{% url 'profile' %}">Profile</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-
-                    {% else %}
-                    <li>
-                        <a href="{% url 'login' %}">Login</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
+            <!-- No longer required, as it's integrated into the bars -->
         </div>
     </div>
+
     <!-- Main content section -->
     {% block content %}{% endblock %}
+
+    <!-- Footer section containing copyright information -->
+    <footer>&copy; TripMate </footer>
 </body>
-<!-- Footer section containing copyright information -->
-<footer>&copy; TripMate </footer>
 </html>

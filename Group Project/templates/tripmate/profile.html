@@ -2,44 +2,50 @@
 {% load static %}
 
 {% block content %}
-  <main>
-    <form>
-        <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
-        <h2>Your Profile</h2>
-        <div>
-          {% if user.userprofile.picture %}
-            <img src="{{ user.userprofile.picture.url }}" alt="Profile Photo" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
-          {% else %}
-            <img src="{% static 'images/default-profile.jpg' %}" alt="Default Photo" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
-          {% endif %}
+<main class="profile-page">
+    <img class="background" src="{% static 'images/background5.jpg' %}" alt="">
+
+    <div class="profile-header">
+        <div class="profile-picture-container">
+            {% if user.userprofile.picture %}
+                <img src="{{ user.userprofile.picture.url }}" alt="Profile Photo" class="profile-picture">
+            {% else %}
+                <img src="{% static 'images/default-profile.jpg' %}" alt="Default Photo" class="profile-picture">
+            {% endif %}
         </div>
-    
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Gender:</strong> {{ user.userprofile.gender|title }}</p>
-        <p><strong>Bio:</strong></p>
-        <p>{{ user.userprofile.bio|linebreaks }}</p>
-        <a href="{% url 'edit_profile' %}">Edit Profile</a>
-        <hr>
-<h3>Your Friends</h3>
-{% if friends %}
-  <ul style="padding-left: 20px;">
-    {% for friend in friends %}
-    <li style="margin-bottom: 10px;">
-      <a href="{% url 'view_profile' friend.user.username %}" style="display: flex; align-items: center; text-decoration: none;">
-        {% if friend.picture %}
-          <img src="{{ friend.picture.url }}" alt="{{ friend.user.username }}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+        <div class="profile-info">
+            <div class="username-container">
+                <h2>{{ user.username }}</h2>
+                <a href="{% url 'edit_profile' %}" class="edit-profile-button">Edit Profile</a>
+            </div>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Gender:</strong> {{ user.userprofile.gender|title }}</p>
+            <p><strong>Bio:</strong> <span class="bio-text">{{ user.userprofile.bio|linebreaks }}</span></p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="friends-section">
+        <h3>Your Friends</h3>
+        {% if friends %}
+        <div class="friends-list">
+            {% for friend in friends %}
+            <div class="friend">
+                <a href="{% url 'view_profile' friend.user.username %}" class="friend-link">
+                    {% if friend.picture %}
+                        <img src="{{ friend.picture.url }}" alt="{{ friend.user.username }}" class="friend-picture">
+                    {% else %}
+                        <img src="{% static 'images/default-profile.jpg' %}" alt="Default" class="friend-picture">
+                    {% endif %}
+                    <span class="friend-username">{{ friend.user.username }}</span>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
         {% else %}
-          <img src="{% static 'images/default-profile.jpg' %}" alt="Default" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+        <p>You don't have any friends yet.</p>
         {% endif %}
-        <span style="font-weight: bold; color: #333;">{{ friend.user.username }}</span>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>You don't have any friends yet.</p>
-{% endif %}
-    </form>
-  </main>
+    </div>
+</main>
 {% endblock %}
