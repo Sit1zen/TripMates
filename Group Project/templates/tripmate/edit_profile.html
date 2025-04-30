@@ -5,7 +5,7 @@
   <h2>Edit Your Profile</h2>
 
   <form method="post" enctype="multipart/form-data">
-    <img class="background" src="{% static 'images/logo.jpg' %}" alt="Logo">
+    <img class="background" src="{% static 'images/background.jpg' %}" alt="">
     {% csrf_token %}
 
     {{ form.non_field_errors }}

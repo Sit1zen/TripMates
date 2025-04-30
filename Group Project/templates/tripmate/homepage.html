@@ -3,10 +3,17 @@
 
 {% block content %}
 <div>
+  <img class="background" src="{% static 'images/background2.jpg' %}" alt="">
+
     <div>
-        <img class="background" src="/static/images/background.jpg" alt="">
-        <h1 class="Welcome">Welcome to TripMate</h1>
-        <h3 class="text1">“Welcome to Trip Mates, where every journey shared is a new adventure discovered—connect, explore, and inspire with fellow travelers from around the globe!”</h3>
+      
+        <h1 class="Welcome">
+          Welcome to <img src="/static/images/logo.png" alt="Trip Mates" class="logo-text">
+          </h1>
+          
+        <h3 class="text1">"where every journey shared is a new adventure discovered <br> Connect, Explore and Inspire with fellow travelers from around the globe!”</h3>
+          <br>
+          <h3 class="text1">Try to post something and make friends!</h3>
     </div>     
 </div>
 {% endblock %}
